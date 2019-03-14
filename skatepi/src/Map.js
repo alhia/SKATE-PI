@@ -18,13 +18,9 @@ class Map extends Component {
     super(props);
     
     this.state = {
-      card: [{
-        text: ['Skatepark 135 ligger nära Tyresö centrum och omfattar en skateplaza på sjuhundra kvadratmeter. Parken har en streetinriktning och har också play- och miniramp samt kidneypool.'],
-         title: ['Tyresö skateplaza'],
-         lat: 59.2421847,
-         lng: 18.2300861
-       }
-   ]
+      error: null,
+      isLoaded: false,
+      card: []
 
     }; 
   }
@@ -35,11 +31,26 @@ class Map extends Component {
     },
     zoom: 15
   }
-  /* componentDidMount() {
-    fetch('https://api.jsonbin.io/b/5c8a5731e5cf2761bec1f195')
-      .then(response => response.json())
-      .then(data => this.setState({ data }));
-  } */
+  componentDidMount() {
+    fetch("https://api.jsonbin.io/b/5c8a5731e5cf2761bec1f195/3")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result.cards)
+          this.setState({
+            isLoaded: true,
+            card: result.cards
+          });
+        },
+       
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
   
  
   render() {
@@ -51,8 +62,8 @@ class Map extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-        {this.state.card.map((el) => <SkateParkMarker lat={el.lat} lng={el.lng} key={el.lng}/>)}
-        {this.state.card.map((el) => <SkateParkCard title={el.title} text={el.text} lat={el.lat} lng={el.lng} key={el.lng}/>)}
+        {this.state.card.map((el) => <SkateParkMarker lat={el.lat} lng={el.lng} key={el.lng} />)}
+        {this.state.card.map((el) => <SkateParkCard title={el.title} text={el.text} lat={el.lat} lng={el.lng} key={el.lng} src={el.imgSrc}/>)}
           
           
         </GoogleMapReact>

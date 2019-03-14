@@ -10,6 +10,7 @@ class SkateParkCard extends Component {
   this.state = {
     title: this.props.title,
     text: this.props.text,
+    imgSrc: this.props.imgSrc
   }
 } 
   render() {
@@ -17,8 +18,7 @@ class SkateParkCard extends Component {
                           display:'none'}}
                   id='card'>
     <Button variant="outline-danger" id="remove">X</Button>
-
-    <Card.Img variant="top" src="https://myskatespots.com/wp-content/uploads/2015/08/Tyres%C3%B6-img6.jpg" >
+    <Card.Img variant="top" src={this.props.imgSrc} >
     </Card.Img>
     <Card.Body>
       <Card.Title>{this.props.title}</Card.Title>
