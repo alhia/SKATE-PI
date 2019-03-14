@@ -8,7 +8,7 @@ class SkateParkMarker extends Component {
     this.showCard = this.showCard.bind(this);
   }
   showCard(){
-    const card = document.getElementById('card');
+    const card = document.getElementById(this.props.uniqueId);
     
     card.style.display = '';
   }

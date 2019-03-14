@@ -4,22 +4,17 @@ import Button from 'react-bootstrap/Button';
 
 
 class SkateParkCard extends Component {
-  constructor(props) {
-    super(props);
+  hideCard(){
+    const card = document.getElementById(this.props.uniqueId);
     
-  this.state = {
-    title: this.props.title,
-    text: this.props.text,
-    imgSrc: this.props.imgSrc
+    card.style.display = 'none';
   }
-} 
   render() {
     return(<Card style={{ width: '30rem', 
                           display:'none'}}
-                  id='card'>
-    <Button variant="outline-danger" id="remove">X</Button>
-    <Card.Img variant="top" src={this.props.imgSrc} >
-    </Card.Img>
+                  id={this.props.uniqueId}>
+    <Button variant="outline-danger" id={'remove-' + this.props.uniqueId} onClick={this.hideCard}>X</Button>
+    <Card.Img variant="top" src={this.props.src}/>
     <Card.Body>
       <Card.Title>{this.props.title}</Card.Title>
       <Card.Text>

@@ -32,7 +32,7 @@ class Map extends Component {
     zoom: 15
   }
   componentDidMount() {
-    fetch("https://api.jsonbin.io/b/5c8a5731e5cf2761bec1f195/3")
+    fetch("https://api.jsonbin.io/b/5c8a5731e5cf2761bec1f195/5")
       .then(res => res.json())
       .then(
         (result) => {
@@ -52,6 +52,9 @@ class Map extends Component {
       )
   }
   
+  generateUniqueKey(el) {
+    return `${el.lat}${el.lng}`;
+  }
  
   render() {
     return (
@@ -62,8 +65,8 @@ class Map extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-        {this.state.card.map((el) => <SkateParkMarker lat={el.lat} lng={el.lng} key={el.lng} />)}
-        {this.state.card.map((el) => <SkateParkCard title={el.title} text={el.text} lat={el.lat} lng={el.lng} key={el.lng} src={el.imgSrc}/>)}
+        {this.state.card.map((el) => <SkateParkMarker lat={el.lat} lng={el.lng} key={this.generateUniqueKey(el)} uniqueId={this.generateUniqueKey(el)} />)}
+        {this.state.card.map((el) => <SkateParkCard title={el.title} text={el.text} lat={el.lat} lng={el.lng} key={this.generateUniqueKey(el)} uniqueId={this.generateUniqueKey(el)} src={el.imgSrc}/>)}
           
           
         </GoogleMapReact>
