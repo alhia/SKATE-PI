@@ -29,14 +29,13 @@ class Map extends Component {
       lat: 59.24,
       lng: 18.23
     },
-    zoom: 15
+    zoom: 8
   }
   componentDidMount() {
-    fetch("https://api.jsonbin.io/b/5c8a5731e5cf2761bec1f195/5")
+    fetch("https://api.jsonbin.io/b/5c8a5731e5cf2761bec1f195/10")
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result.cards)
           this.setState({
             isLoaded: true,
             card: result.cards
@@ -65,7 +64,7 @@ class Map extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-        {this.state.card.map((el) => <SkateParkMarker lat={el.lat} lng={el.lng} key={this.generateUniqueKey(el)} uniqueId={this.generateUniqueKey(el)} />)}
+        {this.state.card.map((el) => <SkateParkMarker lat={el.lat} lng={el.lng} key={this.generateUniqueKey(el)} uniqueId={this.generateUniqueKey(el)} icon={el.icon}/>)}
         {this.state.card.map((el) => <SkateParkCard title={el.title} text={el.text} lat={el.lat} lng={el.lng} key={this.generateUniqueKey(el)} uniqueId={this.generateUniqueKey(el)} src={el.imgSrc}/>)}
           
           

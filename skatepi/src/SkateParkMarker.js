@@ -14,7 +14,7 @@ class SkateParkMarker extends Component {
   }
   render() {
     return(
-      <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17942-200.png" alt="Skatepark Icon" height="40" width="40" onClick={this.showCard}/>
+      <img src={this.props.icon} alt="Skatepark Icon" height="40" width="40" onClick={this.showCard}/>
  
     )
   }
